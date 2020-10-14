@@ -1,0 +1,67 @@
+version: '3.5'
+
+services:
+  develop-php:
+    container_name: develop-web-container
+    hostname: develop-web-server
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ./php/apache2.conf:/etc/apache2/apache2.conf
+      - ./php/mods-enabled/vhost_alias.load://etc/apache2/mods-enabled/vhost_alias.load
+      - ./php/sites-enabled/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./php/sites-enabled/001-virtual.conf:/etc/apache2/sites-enabled/001-virtual.conf
+      - ./php/log:/var/log/apache2
+      - ~/Virtual:/var/www/vhosts
+    ports:
+      - 8000:80
+    networks:
+      - develop-link
+
+  develop-mysql:
+    container_name: develop-db-container
+    hostname: develop-db-server
+    image: mysql:5.6
+    command: >
+      bash -c '
+      touch /var/log/mysql/general.log &&
+      chown mysql:mysql /var/log/mysql/general.log &&
+      tail -f /var/log/mysql/general.log &
+      /entrypoint.sh mysqld
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --general-log=true
+      --general-log-file=/var/log/mysql/general.log
+      '
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/config:/etc/mysql/conf.d
+      - ./mysql/logs:/var/log/mysql
+    ports:
+      - 13306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=password
+    networks:
+      - develop-link
+
+  develop-mailhog:
+    container_name: develop-mail-container
+    hostname: develop-mail-server
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+    networks:
+      - develop-link
+
+networks:
+  default:
+    external:
+      name: bridge
+  develop-link:
+    name: develop.internal
