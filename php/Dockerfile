@@ -2,7 +2,7 @@ FROM php:7.3-apache
 
 RUN apt-get update \
   && apt-get install -y zlib1g-dev libzip-dev mariadb-client libpng-dev libjpeg-dev libfreetype6-dev \
-  && docker-php-ext-install zip pdo_mysql
+  && docker-php-ext-install zip pdo_mysql mysqli
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install gd
