@@ -6,7 +6,7 @@
   * Installed pdo, mysqli, gd, composer etc...
   * Configurred VirtualDocumentRoot (Please see the following instruction)
 * adminer
-* mysql:5.6
+* ~~mysql:5.6~~ -> mariadb:10.5.10
 * maildev/maildev
   * With iconv (Support ISO-2022-JP)
   * [Refered this post, thanks](https://qiita.com/kanemu/items/1f2da063c7e5b5477502)
