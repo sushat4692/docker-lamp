@@ -19,6 +19,6 @@ If you setup `~/Virtual`, you can access by the following.
 
 ```
 Local env                 In Virtual env               URL
-~/Virtual/foo/htdocs  ->  /Virtual/www/foo/htdocs  ->  http://foo.localhost:8000/
-~/Virtual/bar/htdocs  ->  /Virtual/www/bar/htdocs  ->  http://bar.localhost:8000/
+~/Virtual/foo/htdocs  ->  /Virtual/www/foo/htdocs  ->  http://foo.localhost/
+~/Virtual/bar/htdocs  ->  /Virtual/www/bar/htdocs  ->  http://bar.localhost/
 ```
