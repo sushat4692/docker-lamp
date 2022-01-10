@@ -11,8 +11,9 @@ WORKDIR /usr/src/app
 
 ENV NODE_ENV production
 
-RUN npm install node-gyp -g && \
-    npm install iconv --save && \
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
+RUN npm install node-gyp@5.0.5 -g && \
+    npm install iconv@2.3.5 --save && \
     npm prune && \
     npm cache clean --force && \
     rm -rf /tmp/*
