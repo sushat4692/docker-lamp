@@ -1,5 +1,6 @@
 # My local environment for small projects in one docker
 
+
 ## Structure
 
 * php:7.3-apache
@@ -10,6 +11,7 @@
 * maildev/maildev
   * With iconv (Support ISO-2022-JP)
   * [Refered this post, thanks](https://qiita.com/kanemu/items/1f2da063c7e5b5477502)
+
 
 ## VirtualDocumentRoot
 
@@ -22,3 +24,18 @@ Local env                 In Virtual env               URL
 ~/Virtual/foo/htdocs  ->  /Virtual/www/foo/htdocs  ->  http://foo.localhost/
 ~/Virtual/bar/htdocs  ->  /Virtual/www/bar/htdocs  ->  http://bar.localhost/
 ```
+
+## Dummy SMTP Server
+
+You can check email from develop environment by the following url.
+
+* http://localhost:{MAILDEV_SERVER_PORT}/  
+  * `.env.sample` value is 8025  
+  * http://localhost:8025/
+
+If you need to input SMTP information to the system.
+
+* HOST
+  * develop-mail
+* PORT
+  * 25
