@@ -1,4 +1,4 @@
-FROM maildev/maildev
+FROM maildev/maildev:1.1.0
 
 RUN apk add --update \
     gcc \
