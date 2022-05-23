@@ -6,7 +6,7 @@ services:
     hostname: develop-web-server
     build:
       context: ./php
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.php74
     volumes:
       - ./php/php.ini:/usr/local/etc/php/php.ini
       - ./php/msmtprc:/etc/msmtprc

@@ -3,14 +3,27 @@
 
 ## Structure
 
-* php:7.3-apache
+* php:(5.6, 7.3, 7.4, 8.0 and 8.1)-apache
   * Installed pdo, mysqli, gd, composer etc...
   * Configurred VirtualDocumentRoot (Please see the following instruction)
 * adminer
 * ~~mysql:5.6~~ -> mariadb:10.5.10
-* maildev/maildev
+* maildev/maildev:2.0.5
   * With iconv (Support ISO-2022-JP)
   * [Refered this post, thanks](https://qiita.com/kanemu/items/1f2da063c7e5b5477502)
+
+
+## How to change PHP version
+
+You can change PHP version by updating `docker-compose.yml`.
+
+```yaml
+# Default: php7.4
+dockerfile: Dockerfile.php74
+
+# e.g. php8.1
+dockerfile: Dockerfile.php81
+```
 
 
 ## VirtualDocumentRoot
@@ -24,6 +37,7 @@ Local env                 In Virtual env               URL
 ~/Virtual/foo/htdocs  ->  /Virtual/www/foo/htdocs  ->  http://foo.localhost/
 ~/Virtual/bar/htdocs  ->  /Virtual/www/bar/htdocs  ->  http://bar.localhost/
 ```
+
 
 ## Dummy SMTP Server
 
@@ -39,3 +53,12 @@ If you need to input SMTP information to the system.
   * develop-mail
 * PORT
   * 25
+
+## Memo
+
+### How to copy SQL File from Host to Adminer container for importing
+
+```bash
+docker compose cp adminer.sql develop-adminer:/var/www/html/adminer.sql
+```
+
