@@ -7,7 +7,7 @@
   * Installed pdo, mysqli, gd, composer etc...
   * Configurred VirtualDocumentRoot (Please see the following instruction)
 * adminer
-* ~~mysql:5.6~~ -> mariadb:10.5.10
+* mariadb:10.5.10
 * maildev/maildev:2.0.5
   * With iconv (Support ISO-2022-JP)
   * [Refered this post, thanks](https://qiita.com/kanemu/items/1f2da063c7e5b5477502)
@@ -15,14 +15,18 @@
 
 ## How to change PHP version
 
-You can change PHP version by updating `docker-compose.yml`.
+You can change PHP version depends on starting command.
 
-```yaml
-# Default: php7.4
-dockerfile: Dockerfile.php74
+```bash
+# e.g. php5.6
+$ docker compose -f docker-compose.yml -f docker-compose.php56.yml up
+# or `start`
+$ docker compose -f docker-compose.yml -f docker-compose.php56.yml start
 
 # e.g. php8.1
-dockerfile: Dockerfile.php81
+$ docker compose -f docker-compose.yml -f docker-compose.php81.yml up
+# or `start`
+$ docker compose -f docker-compose.yml -f docker-compose.php81.yml start
 ```
 
 
@@ -54,7 +58,7 @@ If you need to input SMTP information to the system.
 * PORT
   * 25
 
-## Memo
+## Remarks
 
 ### How to copy SQL File from Host to Adminer container for importing
 
