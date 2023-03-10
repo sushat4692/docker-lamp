@@ -10,7 +10,7 @@ RUN apt-get update \
     libwebp-dev\
     libicu-dev\
     msmtp\
-  && docker-php-ext-install zip pdo_mysql mysqli \
+  && docker-php-ext-install zip pdo_mysql mysqli exif \
   && apt-get autoremove -y \
   && apt-get clean -y
 
