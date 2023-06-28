@@ -1,17 +1,13 @@
 # My local environment for small projects in one docker
 
-
 ## Structure
 
-* php:(5.6, 7.3, 7.4, 8.0 and 8.1)-apache
-  * Installed pdo, mysqli, gd, composer etc...
-  * Configurred VirtualDocumentRoot (Please see the following instruction)
-* adminer
-* mariadb:10.5.10
-* maildev/maildev:2.0.5
-  * With iconv (Support ISO-2022-JP)
-  * [Refered this post, thanks](https://qiita.com/kanemu/items/1f2da063c7e5b5477502)
-
+- php:(5.6, 7.3, 7.4, 8.0 and 8.1)-apache
+  - Installed pdo, mysqli, gd, composer etc...
+  - Configurred VirtualDocumentRoot (Please see the following instruction)
+- adminer
+- mariadb:10.5.10
+- axllent/mailpit:v1.6
 
 ## How to change PHP version
 
@@ -29,7 +25,6 @@ $ docker compose -f docker-compose.yml -f docker-compose.php81.yml up
 $ docker compose -f docker-compose.yml -f docker-compose.php81.yml start
 ```
 
-
 ## VirtualDocumentRoot
 
 You can configure Virtual directory in .env `WEB_SERVER_DIR`.
@@ -42,21 +37,20 @@ Local env                 In Virtual env               URL
 ~/Virtual/bar/htdocs  ->  /Virtual/www/bar/htdocs  ->  http://bar.localhost/
 ```
 
-
 ## Dummy SMTP Server
 
 You can check email from develop environment by the following url.
 
-* http://localhost:{MAILDEV_SERVER_PORT}/  
-  * `.env.sample` value is 8025  
-  * http://localhost:8025/
+- http://localhost:{MAILPIT_SERVER_FRONT_PORT}/
+  - `.env.sample` value is 8025
+  - http://localhost:8025/
 
 If you need to input SMTP information to the system.
 
-* HOST
-  * develop-mail
-* PORT
-  * 25
+- HOST
+  - develop-mailpit
+- PORT
+  - 1025
 
 ## Remarks
 
@@ -65,4 +59,3 @@ If you need to input SMTP information to the system.
 ```bash
 docker compose cp adminer.sql develop-adminer:/var/www/html/adminer.sql
 ```
-
