@@ -2,27 +2,42 @@
 
 ## Structure
 
-- php:(5.6, 7.3, 7.4, 8.0 and 8.1)-apache
+- php:(5.6, 7.3, 7.4, 8.0, 8.1 and 8.2)-apache
   - Installed pdo, mysqli, gd, composer etc...
   - Configurred VirtualDocumentRoot (Please see the following instruction)
 - adminer
 - mariadb:10.5.10
 - axllent/mailpit:v1.6
 
+## Commands
+
+You can use `command.sh` to control containers.
+
+```bash
+# Up (Build and Start) containers
+$ ./command.sh up
+# Start containers
+$ ./command.sh start
+# Stop containers
+$ ./command.sh stop
+# Delete containers, images and volumes
+$ ./command.sh delete
+```
+
 ## How to change PHP version
 
-You can change PHP version depends on starting command.
+`command.sh` has an argument to change PHP version.
 
 ```bash
 # e.g. php5.6
-$ docker compose -f docker-compose.yml -f docker-compose.php56.yml up
+$ ./command.sh up 56
 # or `start`
-$ docker compose -f docker-compose.yml -f docker-compose.php56.yml start
+$ ./command.sh start 56
 
 # e.g. php8.1
-$ docker compose -f docker-compose.yml -f docker-compose.php81.yml up
+$ ./command.sh up 81
 # or `start`
-$ docker compose -f docker-compose.yml -f docker-compose.php81.yml start
+$ ./command.sh start 81
 ```
 
 ## VirtualDocumentRoot
