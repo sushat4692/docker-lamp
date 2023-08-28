@@ -6,15 +6,22 @@ echo "Usage: command.sh [delete|start|stop|up] [php version]?"
 exit 1
 fi
 
+# Get Container Option Files
+ALL_CONTAINER_OPTIONS=" -f docker-compose.yml"
+CONTAINER_PATHS="./docker-compose.php*.yml"
+for FILE in $CONTAINER_PATHS; do
+    ALL_CONTAINER_OPTIONS+=" -f $FILE"
+done
+
 case $1 in
 delete)
 echo "Delete containers..."
-docker-compose -f docker-compose.yml -f docker-compose.php56.yml -f docker-compose.php71.yml -f docker-compose.php72.yml -f docker-compose.php73.yml -f docker-compose.php74.yml -f docker-compose.php80.yml -f docker-compose.php81.yml down --rmi all --volumes --remove-orphans
+docker-compose $ALL_CONTAINER_OPTIONS down --rmi all --volumes --remove-orphans
 exit 1
 ;;
 stop)
 echo "Stop containers..."
-docker-compose -f docker-compose.yml -f docker-compose.php56.yml -f docker-compose.php71.yml -f docker-compose.php72.yml -f docker-compose.php73.yml -f docker-compose.php74.yml -f docker-compose.php80.yml -f docker-compose.php81.yml stop
+docker-compose $ALL_CONTAINER_OPTIONS stop
 exit 1
 ;;
 esac
