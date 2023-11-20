@@ -36,11 +36,3 @@ services:
       - '${MAILPIT_SERVER_FRONT_PORT:-8025}:8025'
     networks:
       - develop-link
-
-networks:
-  develop-link:
-    name: develop.internal
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.28.0.0/24"
