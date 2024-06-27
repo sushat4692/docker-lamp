@@ -1,10 +1,10 @@
 services:
-  develop-php82:
-    container_name: develop-web-container82
+  develop-php83:
+    container_name: develop-web-container83
     hostname: develop-web-server
     build:
       context: ./php
-      dockerfile: Dockerfile.php82
+      dockerfile: Dockerfile.php83
     volumes:
       - ./php/php.ini:/usr/local/etc/php/php.ini
       - ./php/msmtprc:/etc/msmtprc

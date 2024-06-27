@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
   develop-php71:
     container_name: develop-web-container71
