@@ -18,12 +18,12 @@ done
 case $1 in
 delete)
 echo "Delete containers..."
-docker-compose $ALL_CONTAINER_OPTIONS down --rmi all --volumes --remove-orphans
+docker compose $ALL_CONTAINER_OPTIONS down --rmi all --volumes --remove-orphans
 exit 1
 ;;
 stop)
 echo "Stop containers..."
-docker-compose $ALL_CONTAINER_OPTIONS stop
+docker compose $ALL_CONTAINER_OPTIONS stop
 exit 1
 ;;
 esac
@@ -39,22 +39,22 @@ fi
 case $1 in
 up)
 echo "Up containers..."
-docker-compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER up
+docker compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER up
 ;;
 start)
 echo "Start containers..."
-docker-compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER start
+docker compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER start
 ;;
 switch)
 echo "Switch container..."
 echo "Stop current containers..."
-docker-compose $PHP_CONTAINER_OPTIONS stop
+docker compose $PHP_CONTAINER_OPTIONS stop
 echo "Start containers..."
-docker-compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER start
+docker compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER start
 ;;
 exec)
 echo "Exec command container..."
-docker-compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER exec "develop-php${2:-"81"}" $3
+docker compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER exec "develop-php${2:-"81"}" $3
 ;;
 *)
 echo "Invalid command."
