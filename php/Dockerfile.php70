@@ -1,9 +1,9 @@
-FROM php:5.6-apache
+FROM php:7.0-apache
 
 RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list &&\
   echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list
 
-RUN apt-get clean && apt-get update && apt-get install gnupg --allow-unauthenticated -y
+RUN apt-get update && apt-get install gnupg --allow-unauthenticated -y
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A
@@ -18,15 +18,22 @@ RUN apt-get update \
     libwebp-dev\
     libicu-dev\
     msmtp\
-  && docker-php-ext-install zip pdo_mysql mysqli mbstring exif\
+  && docker-php-ext-install zip pdo_mysql mysqli exif \
   && apt-get autoremove -y \
   && apt-get clean -y
 
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install intl
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr --with-png-dir=/usr --with-jpeg-dir=/usr
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/ --with-png-dir=/usr/include/
 RUN docker-php-ext-install gd
 
+# Composer install
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
+
 WORKDIR /var/www
+
 RUN a2enmod rewrite

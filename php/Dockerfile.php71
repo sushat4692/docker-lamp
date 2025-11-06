@@ -1,5 +1,15 @@
 FROM php:7.1-apache
 
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list &&\
+  echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list
+
+RUN apt-get update && apt-get install gnupg-agent libtinfo5 libreadline7 gnupg --allow-remove-essential --allow-unauthenticated -y
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A
+
+RUN apt-get install zlib1g=1:1.2.8.dfsg-5+deb9u1 -y --allow-downgrades
+
 RUN apt-get update \
   && apt-get install -y\
     zlib1g-dev\

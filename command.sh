@@ -45,6 +45,10 @@ start)
 echo "Start containers..."
 docker compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER start
 ;;
+log)
+echo "Log containers..."
+docker compose -f docker-compose.network.yml -f docker-compose.yml -f $CONTAINER logs "develop-php${2:-"81"}"
+;;
 switch)
 echo "Switch container..."
 echo "Stop current containers..."
